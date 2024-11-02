@@ -1,0 +1,16 @@
+services:
+
+  makerbot:
+    image: makerbot
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DISPLAY=${DISPLAY}  # Pass the DISPLAY environment variable from the host
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix  # X11 socket for GUI access
+      - ~/.Xauthority:/root/.Xauthority  # Share Xauthority file for GUI access
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0  # Pass the USB device to the container
+    stdin_open: true  # Keep stdin open (for interactive usage)
+    tty: true  # Allocate a pseudo-TTY (useful for GUI apps)
